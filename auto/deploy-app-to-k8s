@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+source ./auto/set-env-helpers
+
+auto/build-k8s-manifest
+
+kubectl apply -f k8s/kustomize-output.yaml
+
+kubectl rollout status -w deployment/devops-joi

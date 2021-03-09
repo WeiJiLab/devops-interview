@@ -1,0 +1,44 @@
+#!/bin/bash -e
+
+REPO_NAMESPACE="joidevops"
+APP_NAME="app"
+MIGRATION_NAME="migration"
+GIT_HASH=$(git rev-parse --short HEAD)
+TAG_TIME=$(date +'%Y%m%d%H%M')
+PROJECT_NAME=${PROJECT_NAME:-joi}
+KUBE_CONFILE="./config/kube-config.txt"
+ALICR_PREFIX="registry.cn-hongkong.aliyuncs.com"
+
+display_status() {
+  echo ">>> $1 <<<" 1>&2
+}
+
+function terraform() {
+
+  [[ ! -f ./tmp/env ]] && echo > ./tmp/.env
+
+  docker run --rm \
+  -v ${PWD}:/working \
+  -w /working \
+  -e AWS_ACCESS_KEY_ID \
+  -e AWS_SECRET_ACCESS_KEY \
+  -e AWS_SESSION_TOKEN \
+  -e AWS_DEFAULT_REGION \
+  --env-file ./tmp/.env \
+  hashicorp/terraform $@
+}
+
+function kubectl() {
+  docker run --rm \
+  -v ${PWD}/${KUBE_CONFILE}:/.kube/config \
+  -v ${PWD}:/working \
+  -w /working \
+  bitnami/kubectl $@
+}
+
+function kustomize() {
+  docker run --rm \
+  -v ${PWD}/k8s:/working \
+  -w /working \
+  bitlayer/kustomize:v2.1.0 $@
+}

@@ -1,0 +1,9 @@
+#! /bin/bash -e
+#
+
+cd $(dirname $0)/..
+source ./auto/set-env-helpers
+
+auto/stop-local-env
+auto/build-docker-images
+auto/start-local-env

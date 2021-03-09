@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mysql_command="mysql -h${DB_HOST} -u${DB_USER} -p${DB_PASSWORD}"
+
+echo "Create database ${DB_NAME}" 1>&2
+echo "DROP DATABASE IF EXISTS ${DB_NAME};CREATE DATABASE ${DB_NAME}" | ${mysql_command}
+if [ $? -ne 0 ]; then
+  echo "Failed to create database"
+  exit 2
+fi
+
+echo "Do database migration in ${DB_NAME}" 1>&2
+cat "/app/data/ip2city.sql" | ${mysql_command} "${DB_NAME}"
+if [ $? -ne 0 ]; then
+  echo "Failed to Do database migration"
+  exit 4
+fi
