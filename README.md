@@ -55,13 +55,8 @@ This repo is used for devops interview.
 
   **Dockerhub**
   ```
-  App: joidevops/app:{TAG}
-  Migration: joidevops/migratino:{TAG}
-  ```
-  **Ali CR**
-  ```
-  App: registry.cn-hongkong.aliyuncs.com/joidevops/app:{TAG}
-  Migration: registry.cn-hongkong.aliyuncs.com/joidevops/migratino:{TAG}
+  App: zionlab/interview-app:{TAG}
+  Migration: zionlab/migratino-app:{TAG}
   ```
   
   If you want to push images to your own docker registry, update the docker registry credential in the `config/cr-credential` and set the right repo path for each image, then run the following script, it will push docker images to your docker hub.

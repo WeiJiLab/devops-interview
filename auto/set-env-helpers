@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-REPO_NAMESPACE="joidevops"
-APP_NAME="app"
-MIGRATION_NAME="migration"
+REPO_NAMESPACE="zionlab"
+APP_NAME="interview-app"
+MIGRATION_NAME="migration-app"
 GIT_HASH=$(git rev-parse --short HEAD)
 TAG_TIME=$(date +'%Y%m%d%H%M')
 PROJECT_NAME=${PROJECT_NAME:-joi}

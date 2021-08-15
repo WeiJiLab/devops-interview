@@ -3,6 +3,6 @@
 cd $(dirname $0)/..
 source ./auto/set-env-helpers
 
-kustomize edit set image joidevops/app=${REPO_NAMESPACE}/app:${GIT_HASH} joidevops/migration=${REPO_NAMESPACE}/migration:${GIT_HASH}
+kustomize edit set image zionlab/app=${REPO_NAMESPACE}/interview-app:${GIT_HASH} zionlab/migration=${REPO_NAMESPACE}/migration-app:${GIT_HASH}
 
 kustomize build . -o kustomize-output.yaml
